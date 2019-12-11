@@ -29,10 +29,7 @@ export default class ReadingListContainer extends PersistContainer {
 			a => a.pageid === article.pageid
 		);
 		if (!aList || aList.length === 0) {
-			const l = this.state.readingList;
-			this.setState({readingList: [...l, article]});
+			this.setState(prev => ({readingList: [...prev.readingList, article]}));
 		}
-		console.log(article.title);
-		console.log(this.state.readingList);
 	}
 }
