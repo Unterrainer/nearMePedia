@@ -4,6 +4,11 @@ import ScreenA from "./ScreenA/ScreenA"
 import ScreenB from './ScreenB/ScreenB';
 import ScreenC from './ScreensC/ScreenC';
 import { Provider } from "unstated";
+import RootComponent from './RootComponent';
+import ArticleList from './ArticleList/ArticleList';
+import ReadingList from './ReadingList/ReadingList';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
 
 const ActionButton = ({ text, onClick }) => (
 	<TouchableOpacity onPress={onClick}>
@@ -14,6 +19,22 @@ const ActionButton = ({ text, onClick }) => (
 const SearchBtnText = "Search for a location";
 const SavedBtnText = "Open favorite locations";
 const ReadingBtnText = "Open reading list";
+
+const stackRoutes = {
+	Overview: RootComponent,
+	SearchArticles: ScreenA,
+	Results: ArticleList,
+	FavoriteLocations: ScreenB,
+	// AddLocation: Add
+	ReadingList: ReadingList
+}
+
+const stackOptions = {
+	initialRouteName: "Overview"
+}
+
+const AppNavigator = createStackNavigator(stackRoutes, stackOptions);
+const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
 
@@ -27,8 +48,8 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<Provider>
-
-				<View style={styles.container}>
+				<AppContainer/>
+				{/* <View style={styles.container}>
 					{
 						this.state.openScreen === 0 &&
 						<View>
@@ -48,7 +69,7 @@ export default class App extends React.Component {
 						<ScreenC style={styles.container}/>
 					}
 					{this.state.openScreen !== 0 && <ActionButton style={styles.actionButton} text="Home" onClick={() => { this.setState({ openScreen: 0 }) }} />}
-				</View>
+				</View> */}
 			</Provider>
 		);
 	}
