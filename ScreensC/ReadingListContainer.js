@@ -12,7 +12,6 @@ export default class ReadingListContainer extends PersistContainer {
 	persist = {
 		key: "readingList",
 		storage: AsyncStorage,
-		init: []
 	}
 
 	getReadingList = () => this.state.readingList;

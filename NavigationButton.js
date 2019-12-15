@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 export default class NavigationButton extends React.Component {
 	constructor(props) {
@@ -9,10 +9,19 @@ export default class NavigationButton extends React.Component {
 	render() {
 		return (
 			<TouchableOpacity onPress={this.props.navigate}>
-				<Text>{this.props.text}</Text>
+				<Text style={styles.button}>{this.props.text}</Text>
 			</TouchableOpacity>
 		);
 	}
-
 }
+
+const styles = StyleSheet.create({
+	button: {
+		padding: 15,
+		borderWidth: 1,
+		borderColor: "black",
+		margin: 16,
+		borderRadius: 5
+	}
+});
 

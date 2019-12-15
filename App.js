@@ -1,32 +1,21 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
-import ScreenA from "./ScreenA/ScreenA"
-import ScreenB from './ScreenB/ScreenB';
-import ScreenC from './ScreensC/ScreenC';
 import { Provider } from "unstated";
-import RootComponent from './RootComponent';
-import ArticleList from './ArticleList/ArticleList';
-import ReadingList from './ReadingList/ReadingList';
+import RootComponentScreen from './RootComponentScreen';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-
-const ActionButton = ({ text, onClick }) => (
-	<TouchableOpacity onPress={onClick}>
-		<Text style={styles.actionButton}>{text}</Text>
-	</TouchableOpacity>
-)
-
-const SearchBtnText = "Search for a location";
-const SavedBtnText = "Open favorite locations";
-const ReadingBtnText = "Open reading list";
+import SearchScreen from './ScreenA/SearchScreen';
+import ResultListScreen from './ResultListScreen';
+import FavoriteLocationScreen from './FavoriteLocationScreen';
+import AddLocationScreen from './AddLocationScreen';
+import ReadingListScreen from './ReadingListScreen';
 
 const stackRoutes = {
-	Overview: RootComponent,
-	SearchArticles: ScreenA,
-	Results: ArticleList,
-	FavoriteLocations: ScreenB,
-	// AddLocation: Add
-	ReadingList: ReadingList
+	Overview: RootComponentScreen,
+	SearchArticles: SearchScreen,
+	Results: ResultListScreen,	// Nicht direkt machen sondern über screen
+	FavoriteLocations: FavoriteLocationScreen,
+	AddLocation: AddLocationScreen,
+	ReadingList: ReadingListScreen
 }
 
 const stackOptions = {
@@ -36,66 +25,12 @@ const stackOptions = {
 const AppNavigator = createStackNavigator(stackRoutes, stackOptions);
 const AppContainer = createAppContainer(AppNavigator);
 
-export default class App extends React.Component {
 
-	constructor() {
-		super()
-		this.state = {
-			openScreen: 0
-		}
-	}
+const App = props => (
+	<Provider>
+		<AppContainer/>
+	</Provider>
 
-	render() {
-		return (
-			<Provider>
-				<AppContainer/>
-				{/* <View style={styles.container}>
-					{
-						this.state.openScreen === 0 &&
-						<View>
-							<Text style={styles.title}>NearMePedia</Text>
-							<View style={styles.buttonContainer}>
-								<ActionButton text={SearchBtnText} onClick={() => { this.setState({ openScreen: 1 }) }}></ActionButton>
-								<ActionButton text={SavedBtnText} onClick={() => { this.setState({ openScreen: 2 }) }}></ActionButton>
-								<ActionButton text={ReadingBtnText} onClick={() => { this.setState({ openScreen: 3 }) }}></ActionButton>
-							</View>
-						</View>
-					}
+)
 
-					{this.state.openScreen === 1 && <ScreenA style={styles.container}/>}
-					{this.state.openScreen === 2 && <ScreenB style={styles.container}/>}
-					{
-						this.state.openScreen === 3 &&
-						<ScreenC style={styles.container}/>
-					}
-					{this.state.openScreen !== 0 && <ActionButton style={styles.actionButton} text="Home" onClick={() => { this.setState({ openScreen: 0 }) }} />}
-				</View> */}
-			</Provider>
-		);
-	}
-}
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		paddingTop: 30,
-		backgroundColor: 'green',
-	},
-	title: {
-		marginTop: 200,
-		marginBottom: 50,
-		textAlign: 'center',
-		fontSize: 30,
-		color: "red"
-	},
-	buttonContainer: {
-	},
-	actionButton: {
-		padding: 15,
-		margin: 16,
-		backgroundColor: 'blue',
-		textAlign: 'center',
-		color: 'white',
-		borderRadius: 5
-	}
-});
+export default App

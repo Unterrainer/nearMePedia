@@ -1,25 +1,42 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import NavivationButton from "./NavigationButton";
 
 export default class RootComponent extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 	}
-
-	navigateTo = link => this.props.navigation.navigate(link)
 
 	render() {
 		return(
-			<View>
-				<Text>Hallo</Text>
+			<View style={styles.container}>
+				<Text style={styles.title}>NearMePedia</Text>
 				<NavivationButton
 					text={"Search for articles"}
-					navigate={() => this.navigateTo("SearchArticles")}
+					navigate={() => this.props.navigateTo("SearchArticles")}
+				/>
+				<NavivationButton
+					text={"Favorite Locations"}
+					navigate={() => this.props.navigateTo("FavoriteLocations")}
+				/>
+				<NavivationButton
+					text={"Reading list"}
+					navigate={() => this.props.navigateTo("ReadingList")}
 				/>
 			</View>
 		);
 	}
 }
 
-RootComponent.navigationOptions = {title: "Test"}
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: "column",
+		justifyContent: "center"
+	},
+	title: {
+		fontSize: 32,
+		textAlign: "center",
+		marginBottom: 100,
+	}
+});

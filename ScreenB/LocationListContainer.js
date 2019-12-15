@@ -9,10 +9,9 @@ export default class LocationListContainer extends PersistContainer {
 		};
 	}
 
-	persitst = {
+	persist = {
 		key: "locationList",
 		storage: AsyncStorage,
-		init: []
 	}
 
 	getLocationList = () => this.state.locationList;
@@ -25,6 +24,10 @@ export default class LocationListContainer extends PersistContainer {
 	}
 
 	addLocation = location => {
-		this.setState(prev => ({locationList: [...prev.locationList, location]}));
+		const lList = this.state.locationList.filter(
+			loc => loc === location
+		)
+		if (!lList || lList.length === 0)
+			this.setState(prev => ({locationList: [...prev.locationList, location]}));
 	}
 }

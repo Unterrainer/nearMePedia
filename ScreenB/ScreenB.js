@@ -1,38 +1,52 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Subscribe } from "unstated";
-import LocationListContainer from "./LocationListContainer";
+import { View, Text, FlatList } from "react-native";
+import NavigationButton from "../NavigationButton";
+import Location from "../Location";
+import ActionButton from "../ActionButton";
 
 export default class ScreenB extends React.Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+		this.state = {
+			locations: props.locations
+		}
 	}
 
 	render() {
 		return (
 			<View>
-				<Text style={styles.title}>Favorite locations</Text>
-				<Subscribe to={[LocationListContainer]}>{
-					container => (
-						<View>
-							{
-							!container.state.locationList || container.state.locationList.lenght === 0
-								? <Text>Add some Locations</Text>
-								: <Text>There are some locations</Text>
+				<NavigationButton
+					text="Add new Location"
+					navigate={() => this.props.navigateTo("AddLocation")}
+				/>
+				<ActionButton
+					text="Add current Location"
+					onClick={() => this.props.addCurrent()}
+				/>
+				<ActionButton
+					text="Search for articles at current location"
+					onClick={() => this.props.openCur()}
+				/>
+
+				<View>
+					{
+					(!this.props.locations || this.props.locations.length === 0)
+						? <Text>Add some Locations</Text>
+						: <FlatList
+							data={this.props.locations}
+							renderItem={
+								({ item }) =>
+									<Location
+										location={item}
+										remove={() => this.props.remove(item)}
+										open={() => this.props.openLoc(item)}
+									/>
 							}
-						</View>
-					)
-				}
-				</Subscribe>
+							keyExtractor={item => item.longitude.toString()}
+						/>
+					}
+				</View>
 			</View>
 		)
 	}
 }
-
-const styles = StyleSheet.create({
-	title: {
-		textAlign: "center",
-		fontSize: 20,
-
-	}
-});

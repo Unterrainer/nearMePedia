@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
 	actionButton: {
 		padding: 15,
 		margin: 16,
-		backgroundColor: 'blue',
 		textAlign: 'center',
-		color: 'white',
-		borderRadius: 5
+		borderRadius: 5,
+		borderWidth: 1,
+		borderColor: "black"
 	}
 })

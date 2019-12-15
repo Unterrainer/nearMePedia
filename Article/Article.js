@@ -1,7 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View, TouchableOpacity, Linking } from "react-native";
-import { Subscribe, Provider } from "unstated";
-import ReadingListContainer from "../ScreensC/ReadingListContainer";
+import ActionButton from "../ActionButton";
 
 export default class Article extends React.Component {
 	constructor(props) {
@@ -9,8 +8,34 @@ export default class Article extends React.Component {
 		this.state = {
 			item: props.item,
 			btnText: props.btnText,
-			action: props.action
+			action: props.action,
+			currLoc: props.currLoc
 		}
+	}
+
+	calcDistance = () => {
+		const R = 6371000; // Radius of earth in meter
+		const loc1 = this.state.item;
+		const loc2 = this.state.currLoc;
+		console.log(loc2);
+		const dLat = this.deg2rad(loc2.latitude - loc1.lat);
+		const dLon = this.deg2rad(loc2.longitude - loc1.lon);
+		const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+			Math.cos(this.deg2rad(loc1.lat)) * Math.cos(this.deg2rad(loc2.latitude)) *
+			Math.sin(dLon/2) * Math.sin(dLon/2);
+		const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+		const d = R * c; // Distance in meter
+		return this.round(d);
+	}
+
+	round = num => {
+		let n = num * 10;
+		n = Math.round(n);
+		return n/10;
+	}
+
+	deg2rad = deg => {
+		return deg * (Math.PI / 180)
 	}
 
 	open = () => {
@@ -18,36 +43,18 @@ export default class Article extends React.Component {
 		Linking.openURL(url)
 	}
 
-	executeAction = container => {
-		switch (this.state.action) {
-			case "add":
-				container.addArticle(this.state.item);
-				break;
-			case "remove":
-				container.removeArticle(this.state.item);
-				break;
-
-			default:
-				break;
-		}
-	}
-
 	render() {
 		return (
-			<Subscribe to={[ReadingListContainer]}>{
-				container => (
-				<View style={styles.article}>
-					<TouchableOpacity onPress={this.open}>
-						<Text style={styles.title}>{this.state.item.title}</Text>
-						<Text>Distance: {this.state.item.dist}</Text>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={() => this.executeAction(container)}>
-				<Text style={styles.button}>{this.state.btnText}</Text>
-					</TouchableOpacity>
-				</View>
-				)
-			}
-			</Subscribe>
+			<View style={styles.article}>
+				<TouchableOpacity onPress={this.open}>
+					<Text style={styles.title}>{this.state.item.title}</Text>
+					<Text>Distance: {this.calcDistance()}</Text>
+				</TouchableOpacity>
+				<ActionButton
+					text={this.state.btnText}
+					onClick={this.state.action}
+				/>
+			</View>
 		)
 	}
 }
@@ -55,21 +62,14 @@ export default class Article extends React.Component {
 const styles = StyleSheet.create({
 	article: {
 		borderRadius: 5,
-		backgroundColor: "pink",
-		marginBottom: 8,
-		padding: 8
+		backgroundColor: "#fafafa",
+		padding: 8,
+		margin: 16
 	},
 	title: {
 		color: 'blue',
-		textAlign: "center"
-	},
-	button: {
-		borderRadius: 5,
-		padding: 15,
-		backgroundColor: "green",
-		width: 200,
-		marginTop: 20,
+		fontSize: 20,
 		textAlign: "center",
-		alignSelf: "center"
+		marginBottom: 10
 	}
 });
