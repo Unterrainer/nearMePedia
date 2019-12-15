@@ -7,12 +7,12 @@ export default class ScreenA extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			lat: "46.510725",
-			long: "11.266791",
-			isValid: true
-			// lat: "",
-			// long: "",
-			// isValid: false
+			// lat: "46.510725",
+			// long: "11.266791",
+			// isValid: true
+			lat: "",
+			long: "",
+			isValid: false
 		}
 	}
 
