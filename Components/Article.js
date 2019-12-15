@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View, TouchableOpacity, Linking } from "react-native";
-import ActionButton from "../ActionButton";
+import ActionButton from "./ActionButton";
 
 export default class Article extends React.Component {
 	constructor(props) {

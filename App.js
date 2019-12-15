@@ -1,13 +1,13 @@
 import React from 'react';
 import { Provider } from "unstated";
-import RootComponentScreen from './RootComponentScreen';
+import RootComponentScreen from './Screens/RootComponentScreen';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import SearchScreen from './ScreenA/SearchScreen';
-import ResultListScreen from './ResultListScreen';
-import FavoriteLocationScreen from './FavoriteLocationScreen';
-import AddLocationScreen from './AddLocationScreen';
-import ReadingListScreen from './ReadingListScreen';
+import SearchScreen from './Screens/SearchScreen';
+import ResultListScreen from './Screens/ResultListScreen';
+import FavoriteLocationScreen from './Screens/FavoriteLocationScreen';
+import AddLocationScreen from './Screens/AddLocationScreen';
+import ReadingListScreen from './Screens/ReadingListScreen';
 
 const stackRoutes = {
 	Overview: RootComponentScreen,

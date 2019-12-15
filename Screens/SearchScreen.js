@@ -1,5 +1,5 @@
 import React from "react";
-import ScreenA from "./ScreenA";
+import ScreenA from "../Components/ScreenA";
 
 const SearchScreen = props => {
 	return (

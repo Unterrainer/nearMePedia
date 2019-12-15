@@ -1,6 +1,5 @@
 import React from "react";
 import { View, TextInput, StyleSheet, Button } from "react-native";
-import ActionButton from "../ActionButton";
 
 export default class ScreenA extends React.Component {
 

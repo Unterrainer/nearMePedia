@@ -1,7 +1,7 @@
 import React from "react";
-import AddLocation from "./AddLocation";
+import AddLocation from "../Components/AddLocation";
 import { Subscribe } from "unstated";
-import LocationListContainer from "./ScreenB/LocationListContainer";
+import LocationListContainer from "../Containers/LocationListContainer";
 
 const AddLocationScreen = props => {
 	const addLocation = (container, location) => {

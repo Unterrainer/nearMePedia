@@ -1,12 +1,10 @@
 import React from "react";
 import { Subscribe } from "unstated";
-import ReadingList from "./ReadingList/ReadingList";
-import ReadingListContainer from "./ScreensC/ReadingListContainer";
+import ReadingList from "../Components/ReadingList";
+import ReadingListContainer from "../Containers/ReadingListContainer";
 
 
 const ReadingListScreen = props => {
-
-
 
 	return (
 		<Subscribe to={[ReadingListContainer]}>{

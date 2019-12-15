@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
-import Article from "../Article/Article";
+import Article from "./Article";
 
 export default class ArticleList extends React.Component {
 	constructor(props) {

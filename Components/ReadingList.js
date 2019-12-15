@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, FlatList, View } from "react-native";
-import Article from "../Article/Article";
+import Article from "./Article";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions"
 

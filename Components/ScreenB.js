@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
-import NavigationButton from "../NavigationButton";
-import Location from "../Location";
-import ActionButton from "../ActionButton";
+import NavigationButton from "./NavigationButton";
+import Location from "./Location";
+import ActionButton from "./ActionButton";
 
 export default class ScreenB extends React.Component {
 	constructor(props) {

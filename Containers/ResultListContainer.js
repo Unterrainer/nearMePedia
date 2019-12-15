@@ -1,4 +1,4 @@
-import { PersistContainer } from "./mypersist";
+import { PersistContainer } from "../mypersist";
 import { AsyncStorage } from "react-native";
 
 export default class ResultListContainer extends PersistContainer {

@@ -1,7 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
-import ArticleList from "./ArticleList/ArticleList";
-import ReadingListContainer from "./ScreensC/ReadingListContainer";
+import ArticleList from "../Components/ArticleList";
+import ReadingListContainer from "../Containers/ReadingListContainer";
 import { Subscribe } from "unstated";
 
 const addToReadingList = (container, article) => {

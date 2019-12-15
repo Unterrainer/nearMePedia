@@ -1,8 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Button } from "react-native";
-import { Subscribe } from "unstated";
+import { View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import ActionButton from "./ActionButton";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions"
 

@@ -1,7 +1,7 @@
 import React from "react";
-import ScreenB from "./ScreenB/ScreenB";
+import ScreenB from "../Components/ScreenB";
 import { Subscribe } from "unstated";
-import LocationListContainer from "./ScreenB/LocationListContainer";
+import LocationListContainer from "../Containers/LocationListContainer";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions"
 
