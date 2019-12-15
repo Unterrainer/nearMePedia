@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
-import NavigationButton from "./NavigationButton";
 import Location from "./Location";
 import ActionButton from "./ActionButton";
 
@@ -15,9 +14,9 @@ export default class ScreenB extends React.Component {
 	render() {
 		return (
 			<View>
-				<NavigationButton
+				<ActionButton
 					text="Add new Location"
-					navigate={() => this.props.navigateTo("AddLocation")}
+					onClick={() => this.props.navigateTo("AddLocation")}
 				/>
 				<ActionButton
 					text="Add current Location"

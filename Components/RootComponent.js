@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
-import NavivationButton from "./NavigationButton";
+import ActionButton from "./ActionButton";
 
 export default class RootComponent extends React.Component {
 	constructor(props) {
@@ -11,17 +11,17 @@ export default class RootComponent extends React.Component {
 		return(
 			<View style={styles.container}>
 				<Text style={styles.title}>NearMePedia</Text>
-				<NavivationButton
+				<ActionButton
 					text={"Search for articles"}
-					navigate={() => this.props.navigateTo("SearchArticles")}
+					onClick={() => this.props.navigateTo("SearchArticles")}
 				/>
-				<NavivationButton
+				<ActionButton
 					text={"Favorite Locations"}
-					navigate={() => this.props.navigateTo("FavoriteLocations")}
+					onClick={() => this.props.navigateTo("FavoriteLocations")}
 				/>
-				<NavivationButton
+				<ActionButton
 					text={"Reading list"}
-					navigate={() => this.props.navigateTo("ReadingList")}
+					onClick={() => this.props.navigateTo("ReadingList")}
 				/>
 			</View>
 		);
