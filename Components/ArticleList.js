@@ -25,19 +25,18 @@ export default class ArticleList extends React.Component {
 		if (addressResults && addressResults.length) {
 			const address = addressResults[0];
 			this.setState({
-				latitude: address.latitude,
-				longitude: address.longitude
+				location: {
+					latitude: address.latitude,
+					longitude: address.longitude
+				}
 			});
 			const loc = address.latitude + "|" + address.longitude;
-			console.log(loc);
 
 			var params = {
 				action: "query",
 				list: "geosearch",
 				gscoord: loc,
-				// gscoord: "46.510725|11.266791",
 				gsradius: "10000",
-				// gslimit: "10",
 				format: "json"
 			};
 
@@ -50,7 +49,6 @@ export default class ArticleList extends React.Component {
 				.catch(function(error){console.log(error);});
 
 		}
-
 	}
 
 	render() {

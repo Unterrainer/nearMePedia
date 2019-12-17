@@ -12,7 +12,7 @@ import ReadingListScreen from './Screens/ReadingListScreen';
 const stackRoutes = {
 	Overview: RootComponentScreen,
 	SearchArticles: SearchScreen,
-	Results: ResultListScreen,	// Nicht direkt machen sondern über screen
+	Results: ResultListScreen,
 	FavoriteLocations: FavoriteLocationScreen,
 	AddLocation: AddLocationScreen,
 	ReadingList: ReadingListScreen
@@ -30,7 +30,6 @@ const App = () => (
 	<Provider>
 		<AppContainer/>
 	</Provider>
-
 )
 
 export default App

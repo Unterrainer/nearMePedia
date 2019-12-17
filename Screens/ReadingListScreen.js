@@ -4,7 +4,7 @@ import ReadingList from "../Components/ReadingList";
 import ReadingListContainer from "../Containers/ReadingListContainer";
 
 
-const ReadingListScreen = props => {
+const ReadingListScreen = () => {
 	return (
 		<Subscribe to={[ReadingListContainer]}>{
 			container => (

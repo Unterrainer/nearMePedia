@@ -5,19 +5,12 @@ import ActionButton from "./ActionButton";
 export default class Article extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			item: props.item,
-			btnText: props.btnText,
-			action: props.action,
-			currLoc: props.currLoc
-		}
 	}
 
 	calcDistance = () => {
 		const R = 6371000; // Radius of earth in meter
-		const loc1 = this.state.item;
-		const loc2 = this.state.currLoc;
-		console.log(loc2);
+		const loc1 = this.props.item;
+		const loc2 = this.props.currLoc;
 		const dLat = this.deg2rad(loc2.latitude - loc1.lat);
 		const dLon = this.deg2rad(loc2.longitude - loc1.lon);
 		const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
@@ -39,7 +32,7 @@ export default class Article extends React.Component {
 	}
 
 	open = () => {
-		const url = "https://en.wikipedia.org/?curid=" + this.state.item.pageid;
+		const url = "https://en.wikipedia.org/?curid=" + this.props.item.pageid;
 		Linking.openURL(url)
 	}
 
@@ -47,12 +40,12 @@ export default class Article extends React.Component {
 		return (
 			<View style={styles.article}>
 				<TouchableOpacity onPress={this.open}>
-					<Text style={styles.title}>{this.state.item.title}</Text>
+					<Text style={styles.title}>{this.props.item.title}</Text>
 					<Text>Distance: {this.calcDistance()}</Text>
 				</TouchableOpacity>
 				<ActionButton
-					text={this.state.btnText}
-					onClick={this.state.action}
+					text={this.props.btnText}
+					onClick={this.props.action}
 				/>
 			</View>
 		)

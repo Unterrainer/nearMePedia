@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Button } from "react-native";
-import { TextInput } from "react-native-gesture-handler";
+import { View, Button, StyleSheet, TextInput } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions"
 
@@ -16,21 +15,9 @@ export default class AddLocation extends React.Component {
 		}
 	}
 
-	updateLong = val => {
-		if (+val) {
-			this.setState({long: val}, this.validateForm);
-		}
-	}
+	updateLong = val => this.setState({long: val}, this.validateForm);
 
-	updateAddress = add => {
-		this.setState({addTxt: add}, this.validateForm);
-	}
-
-	updateLat = val => {
-		if (+val) {
-			this.setState({lat: val}, this.validateForm);
-		}
-	}
+	updateAddress = add => this.setState({addTxt: add}, this.validateForm);
 
 	handleSubmit = async () => {
 		const addrList = await Location.geocodeAsync(this.state.addTxt);
@@ -38,15 +25,12 @@ export default class AddLocation extends React.Component {
 			const addr = addrList[0];
 			const loc = await this.findAddress(addr);
 			if (loc) {
-				console.log("loc",loc)
 				const location = {
 					latitude: addr.latitude,
 					longitude: addr.longitude,
 					...loc
 				};
-				console.log("location", location);
 				this.props.btnAction(location);
-
 			}
 		}
 	}
@@ -76,34 +60,27 @@ export default class AddLocation extends React.Component {
 
 	render() {
 		return (
-				<View>
-					<View>
-						<TextInput
-							placeholder="Address"
-							onChangeText={this.updateAddress}
-						></TextInput>
-					</View>
-					{/* <View>
-						<TextInput
-							placeholder="Longitude"
-							onChangeText={this.updateLong}
-							keyboardType={'numeric'}
-							></TextInput>
-					</View>
-					<View>
-						<TextInput
-							placeholder="Latitude"
-							onChangeText={this.updateLat}
-							keyboardType={'numeric'}
-						></TextInput>
-					</View> */}
-					<Button
-						title="Add"
-						onPress={this.handleSubmit}
-						disabled={!this.state.isValid}
-					/>
+			<View style={styles.container}>
+				<View style={styles.container}>
+					<TextInput
+						placeholder="Address"
+						onChangeText={this.updateAddress}
+					></TextInput>
 				</View>
+				<Button
+					title="Add"
+					onPress={this.handleSubmit}
+					disabled={!this.state.isValid}
+				/>
+			</View>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		margin: 16
+	}
+});
+
 

@@ -2,12 +2,10 @@ import { PersistContainer } from "../mypersist";
 import { AsyncStorage } from "react-native";
 
 export default class ReadingListContainer extends PersistContainer {
-	constructor(props) {
-		super(props);
-		this.state = {
-			readingList: []
-		};
-	}
+
+	state = {
+		readingList: []
+	};
 
 	persist = {
 		key: "readingList",
@@ -28,7 +26,7 @@ export default class ReadingListContainer extends PersistContainer {
 			a => a.pageid === article.pageid
 		);
 		if (!aList || aList.length === 0) {
-			this.setState(prev => ({readingList: [...prev.readingList, article]}));
+			this.setState(prev => ( {readingList: [...prev.readingList, article] }));
 		}
 	}
 }

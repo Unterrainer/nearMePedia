@@ -4,6 +4,7 @@ import { Subscribe } from "unstated";
 import LocationListContainer from "../Containers/LocationListContainer";
 
 const AddLocationScreen = props => {
+
 	const addLocation = (container, location) => {
 		container.addLocation(location);
 		props.navigation.navigate("FavoriteLocations")

@@ -38,7 +38,7 @@ const FavoriteLocationScreen = props => {
 		props.navigation.navigate(
 			"Results",
 			{
-				location: {longitude: location.longitude, latitude: location.latitude}
+				address: location.street + " " + location.name + ", " + location.city
 			}
 		)
 	}

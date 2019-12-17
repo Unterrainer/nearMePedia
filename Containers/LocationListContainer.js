@@ -2,12 +2,10 @@ import { PersistContainer } from "../mypersist";
 import { AsyncStorage } from "react-native";
 
 export default class LocationListContainer extends PersistContainer {
-	constructor(props) {
-		super(props);
-		this.state = {
-			locationList: []
-		};
-	}
+
+	state = {
+		locationList: []
+	};
 
 	persist = {
 		key: "locationList",
@@ -28,6 +26,6 @@ export default class LocationListContainer extends PersistContainer {
 			loc => loc === location
 		)
 		if (!lList || lList.length === 0)
-			this.setState(prev => ({locationList: [...prev.locationList, location]}));
+			this.setState(prev => ({ locationList: [...prev.locationList, location] }));
 	}
 }
