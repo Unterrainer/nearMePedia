@@ -1,17 +1,17 @@
 import React from "react";
-import ScreenA from "../Components/ScreenA";
+import SearchComponent from "../Components/SearchComponent";
 
 const SearchScreen = props => {
 	return (
-		<ScreenA navigateTo={(long, lat) => props.navigation.navigate(
+		<SearchComponent navigateTo={add => props.navigation.navigate(
 			"Results",
 			{
-				location: {longitude: long, latitude: lat}
+				address: add
 			}
 		)}/>
 	);
 }
 
-ScreenA.navigationOptions = {title: "Search"}
+SearchScreen.navigationOptions = {title: "Search"}
 
 export default SearchScreen;

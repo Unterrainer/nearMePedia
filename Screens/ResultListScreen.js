@@ -12,7 +12,7 @@ const ResultListScreen = props => {
 		<Subscribe to={[ReadingListContainer]}>{
 			container => (
 				<ArticleList
-					location={props.navigation.getParam("location")}
+					address={props.navigation.getParam("address")}
 					btnText={"Add to reading-list"}
 					btnAction={(article) => addToReadingList(container, article)}
 				/>

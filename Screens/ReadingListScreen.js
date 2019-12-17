@@ -5,7 +5,6 @@ import ReadingListContainer from "../Containers/ReadingListContainer";
 
 
 const ReadingListScreen = props => {
-
 	return (
 		<Subscribe to={[ReadingListContainer]}>{
 			container => (

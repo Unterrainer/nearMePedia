@@ -26,7 +26,7 @@ const AppNavigator = createStackNavigator(stackRoutes, stackOptions);
 const AppContainer = createAppContainer(AppNavigator);
 
 
-const App = props => (
+const App = () => (
 	<Provider>
 		<AppContainer/>
 	</Provider>

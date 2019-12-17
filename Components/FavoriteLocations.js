@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import Location from "./Location";
 import ActionButton from "./ActionButton";
 
-export default class ScreenB extends React.Component {
+export default class FavoriteLocations extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,21 +13,23 @@ export default class ScreenB extends React.Component {
 
 	render() {
 		return (
-			<View>
-				<ActionButton
-					text="Add new Location"
-					onClick={() => this.props.navigateTo("AddLocation")}
-				/>
-				<ActionButton
-					text="Add current Location"
-					onClick={() => this.props.addCurrent()}
-				/>
-				<ActionButton
-					text="Search for articles at current location"
-					onClick={() => this.props.openCur()}
-				/>
-
+			<View style={styles.container}>
 				<View>
+					<ActionButton
+						text="Add new Location"
+						onClick={() => this.props.navigateTo("AddLocation")}
+					/>
+					<ActionButton
+						text="Add current Location"
+						onClick={() => this.props.addCurrent()}
+					/>
+					<ActionButton
+						text="Search for articles at current location"
+						onClick={() => this.props.openCur()}
+					/>
+				</View>
+
+				<View style={styles.container}>
 					{
 					(!this.props.locations || this.props.locations.length === 0)
 						? <Text>Add some Locations</Text>
@@ -49,3 +51,9 @@ export default class ScreenB extends React.Component {
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1
+	}
+})

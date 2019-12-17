@@ -1,5 +1,5 @@
 import React from "react";
-import ScreenB from "../Components/ScreenB";
+import FavoriteLocations from "../Components/FavoriteLocations";
 import { Subscribe } from "unstated";
 import LocationListContainer from "../Containers/LocationListContainer";
 import * as Location from "expo-location";
@@ -47,7 +47,7 @@ const FavoriteLocationScreen = props => {
 		props.navigation.navigate(
 			"Results",
 			{
-				location: {longitude: location.longitude, latitude: location.latitude}
+				address: location.street + " " + location.name + ", " + location.city
 			}
 		)
 	}
@@ -55,7 +55,7 @@ const FavoriteLocationScreen = props => {
 	return (
 		<Subscribe to={[LocationListContainer]}>{
 			container => (
-				<ScreenB
+				<FavoriteLocations
 					locations={container.state.locationList}
 					navigateTo={(link) => props.navigation.navigate(link)}
 					remove={(location) => container.removeLocation(location)}

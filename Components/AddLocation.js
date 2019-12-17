@@ -10,6 +10,7 @@ export default class AddLocation extends React.Component {
 		this.state = {
 			long: "",
 			lat: "",
+			addTxt: "",
 			address: {},
 			isValid: false
 		}
@@ -21,6 +22,10 @@ export default class AddLocation extends React.Component {
 		}
 	}
 
+	updateAddress = add => {
+		this.setState({addTxt: add}, this.validateForm);
+	}
+
 	updateLat = val => {
 		if (+val) {
 			this.setState({lat: val}, this.validateForm);
@@ -28,25 +33,33 @@ export default class AddLocation extends React.Component {
 	}
 
 	handleSubmit = async () => {
-		await this.findAddress();
-		console.log("addr",this.state.address);
-		const location = {
-			latitude: this.state.lat,
-			longitude: this.state.long,
-			...this.state.address
+		const addrList = await Location.geocodeAsync(this.state.addTxt);
+		if (addrList && addrList.length) {
+			const addr = addrList[0];
+			const loc = await this.findAddress(addr);
+			if (loc) {
+				console.log("loc",loc)
+				const location = {
+					latitude: addr.latitude,
+					longitude: addr.longitude,
+					...loc
+				};
+				console.log("location", location);
+				this.props.btnAction(location);
+
+			}
 		}
-		console.log("loc", location);
-		this.props.btnAction(location);
 	}
 
-	findAddress = async () => {
+	findAddress = async addr => {
 		const { status } = await Permissions.askAsync(Permissions.LOCATION);
 		if (status === "granted") {
-			const location = { latitude: parseFloat(this.state.lat), longitude: parseFloat(this.state.long)};
+			const location = { latitude: parseFloat(addr.latitude), longitude: parseFloat(addr.longitude)};
 			const addressList = await Location.reverseGeocodeAsync(location);
-			if (addressList.length > 0)
-				this.setState({address: addressList[0]})
+			if (addressList && addressList.length)
+				return addressList[0];
 		}
+		return null;
 	}
 
 	getLocation = () => {
@@ -57,10 +70,7 @@ export default class AddLocation extends React.Component {
 	}
 
 	validateForm = () => {
-		const formValid = (+this.state.long > 0
-			&& +this.state.lat > 0
-			&& +this.state.long > 0
-		)
+		const formValid = this.state.addTxt && this.state.addTxt.length;
 		this.setState({ isValid: formValid })
 	}
 
@@ -68,6 +78,12 @@ export default class AddLocation extends React.Component {
 		return (
 				<View>
 					<View>
+						<TextInput
+							placeholder="Address"
+							onChangeText={this.updateAddress}
+						></TextInput>
+					</View>
+					{/* <View>
 						<TextInput
 							placeholder="Longitude"
 							onChangeText={this.updateLong}
@@ -80,7 +96,7 @@ export default class AddLocation extends React.Component {
 							onChangeText={this.updateLat}
 							keyboardType={'numeric'}
 						></TextInput>
-					</View>
+					</View> */}
 					<Button
 						title="Add"
 						onPress={this.handleSubmit}
