@@ -23,13 +23,10 @@ async function getLocationFromAddress(address) {
  * @param {*} location
  */
 async function findAddress(location) {
-	const status = await askForPermission();
-	if (status === "granted") {
-		const addressLocation = { latitude: parseFloat(location.latitude), longitude: parseFloat(location.longitude)};
-		const addressList = await Location.reverseGeocodeAsync(addressLocation);
-		if (addressList && addressList.length)
-			return addressList[0];
-	}
+	const addressLocation = { latitude: parseFloat(location.latitude), longitude: parseFloat(location.longitude)};
+	const addressList = await Location.reverseGeocodeAsync(addressLocation);
+	if (addressList && addressList.length)
+		return addressList[0];
 	return null;
 }
 
