@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, Text, View, StyleSheet } from "react-native";
 import Article from "./Article";
-import * as Location from "expo-location";
+import { getLocationFromAddress } from "../Utils/myLocation"
 
 export default class ArticleList extends React.Component {
 	constructor(props) {
@@ -20,7 +20,7 @@ export default class ArticleList extends React.Component {
 	fetchResults = async () => {
 		var url = "https://en.wikipedia.org/w/api.php";
 
-		const addressResults = await Location.geocodeAsync(this.props.address);
+		const addressResults = await getLocationFromAddress(this.props.address);
 
 		if (addressResults && addressResults.length) {
 			const address = addressResults[0];
