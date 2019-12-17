@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, Text, View, StyleSheet } from "react-native";
+import { FlatList, Text, View, StyleSheet, ActivityIndicator } from "react-native";
 import Article from "./Article";
 import { getLocationFromAddress } from "../Utils/myLocation"
 
@@ -7,17 +7,22 @@ export default class ArticleList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			loading: false,
 			location: {latitude: "", longitude: ""},
 			results: []
 		}
+	}
+
+	componentDidMount() {
 		this.fetchResults();
 	}
 
 	setResults = response => {
-		this.setState({results: response.query.geosearch});
+		this.setState({ loading: false, results: response.query.geosearch });
 	}
 
 	fetchResults = async () => {
+		this.setState({loading: true});
 		var url = "https://en.wikipedia.org/w/api.php";
 
 		const addressResults = await getLocationFromAddress(this.props.address);
@@ -47,11 +52,13 @@ export default class ArticleList extends React.Component {
 				.then(function(response){return response.json();})
 				.then(response => this.setResults(response))
 				.catch(function(error){console.log(error);});
-
 		}
 	}
 
 	render() {
+		const noResults = this.state.loading
+			? <ActivityIndicator size="large" color="#0000ff"/>
+			: <Text style={styles.emptySet}>No results for this location</Text>;
 		return (
 			<View>
 				{
@@ -69,7 +76,7 @@ export default class ArticleList extends React.Component {
 						}
 						keyExtractor={item => item.pageid.toString()}
 					/>
-					: <Text style={styles.emptySet}>No results for this location</Text>
+					: <View>{ noResults }</View>
 				}
 			</View>
 		)
